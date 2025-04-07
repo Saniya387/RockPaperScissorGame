@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+      background: #f2f2f2;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+
+    .choices button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      transition: background 0.3s;
+    }
+
+    .choices button:hover {
+      background: #45a049;
+    }
+
+    .result, .score {
+      font-size: 1.3em;
+      margin-top: 20px;
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Rock Paper Scissors ✊✋✌️</h1>
+
+  <div class="choices">
+    <button onclick="play('rock')">Rock</button>
+    <button onclick="play('paper')">Paper</button>
+    <button onclick="play('scissors')">Scissors</button>
+  </div>
+
+  <div class="result" id="result"></div>
+  <div class="score" id="score"></div>
+
+  <script>
+    let userScore = 0;
+    let computerScore = 0;
+
+    function play(userChoice) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const emojis = {
+        rock: '✊',
+        paper: '✋',
+        scissors: '✌️'
+      };
+
+      const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+      let resultText = `You chose ${emojis[userChoice]} — Computer chose ${emojis[computerChoice]}<br>`;
+
+      if (userChoice === computerChoice) {
+        resultText += "It's a tie!";
+      } else if (
+        (userChoice === 'rock' && computerChoice === 'scissors') ||
+        (userChoice === 'paper' && computerChoice === 'rock') ||
+        (userChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        userScore++;
+        resultText += "You win!";
+      } else {
+        computerScore++;
+        resultText += "You lose!";
+      }
+
+      document.getElementById('result').innerHTML = resultText;
+      document.getElementById('score').textContent = `Score — You: ${userScore} | Computer: ${computerScore}`;
+    }
+  </script>
+
+</body>
+</html>
